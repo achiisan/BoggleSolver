@@ -5,13 +5,20 @@ class BoggleSolver {
       static Trie wordsFound = new Trie();
       static Trie dictionary = new Trie();
       static int nWords = 0;
+      static int nWordsFound = 0;
       static int N = 0;
+      static boolean noWords = true;
       public static void main(String[] args){
 
           Puzzle.initializePuzzle("input.txt");
           initializeDictionary();
-
         solve();
+
+        if(noWords == true){
+          System.out.println("No Solutions Found.");
+        }else{
+          System.out.println("Generated "+nWordsFound+" words");
+        }
       }
 
       public static void initializeDictionary(){
@@ -73,6 +80,8 @@ class BoggleSolver {
                           if(wordsFound.searchWord(test.trim()) == false){
                             System.out.println(test.trim());
                             wordsFound.addWord(test.trim());
+                            noWords = false;
+                            nWordsFound++;
                           }
 
                         }

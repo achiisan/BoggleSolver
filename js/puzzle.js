@@ -29,8 +29,16 @@ function readSingleFile(evt) {
           }
           puzzleCollection.push(tempPuzzle);
       }
-      selectboard();
 
+      for(i=0; i<puzzleCollection.length; i++){
+        var x = document.getElementById("myContainer");
+        var option = document.createElement("option");
+        option.text = "Tray "+(i+1);
+        option.value = ""+i;
+        x.add(option);
+      }
+
+      $('select').material_select()
 
     }
     r.readAsText(f);

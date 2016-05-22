@@ -58,7 +58,10 @@ project.controller('projectController', ['$scope', function ($scope) {
         }
     }
 
-    $scope.buildPuzzle = function (a) {
+    $scope.buildPuzzle = function () {
+
+      var a = $("#myContainer").val();
+      console.log(a);
       var boards = puzzleCollection[a];
       var dimension = boards.n;
       var board = boards.puzzle;

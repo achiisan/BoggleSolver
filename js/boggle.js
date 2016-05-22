@@ -3,6 +3,7 @@ var nWords = 0;
 var nWordsFound = 0;
 var N = 0;
 var noWords = true;
+var currIter = 0;
 
 var wordsFound = new Trie();
 var dictionary = new Trie();

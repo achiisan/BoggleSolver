@@ -19,9 +19,10 @@
   <script>
       $(document).ready(function() {
           $('select').material_select();
-          document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+          document.getElementById('fileinput').addEventListener('change', readSingleFile, false)
           document.getElementById('fileinput_dict').addEventListener('change', readSingleFile2, false);
       })
+
 
   </script>
   <script type="text/javascript">
@@ -31,9 +32,7 @@
       $("#scor").html("<br>"+ "Current Score: " + score);
     }
 
-    function selectboard(){
-      $("#puz_container").append($("<option />").val("1").text("1"));
-    }
+
     function newgame(){
       resetScore();
       var tt = document.getElementById('totaltime');
@@ -71,6 +70,22 @@
     updatefrequency = 50;
     timervar = null;
 
+function showSoln(){
+  var txt;
+var r = confirm("Showing the solution will abort your game. Confirm?");
+if (r == true) {
+    timeremaining = 0;
+    var k = $("#myContainer").val()
+    var a = puzzleCollection[k];
+    a.words.forEach(appendSoln);
+} else {
+    txt = "You pressed Cancel!";
+}
+}
+
+function appendSoln(item,index){
+  $("#enum2").append(item+"<br>")
+}
   </script>
 
   <style>
@@ -82,7 +97,11 @@
           width: auto;!important
           padding: 2.5%;
       }
-
+      #enum2, #enum {
+        height: 300px;
+        max-height: 300px;
+        overflow-y :scroll;
+      }
 
   </style>
 
@@ -96,6 +115,25 @@
       <a id="logo-container" class="brand-logo">Boggle Solver</a>
     </div>
   </nav>
+
+  <div class="container">
+    <div class="section">
+      <div class="row">
+        <div class="col s12 center">
+
+          <table width=368 cellpadding=0 cellspacing=0 id="timetable">
+          <tr><td id='bar_remaining' width=218 height=25></td><td id='bar_elapsed' width=150 height=25></td>
+          </table>
+          <div id="timeremaining" style="margin-bottom:10px; margin-top: 10px;">
+          Time remaining: ...
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>
 
   <div class="container">
     <div class="section">
@@ -124,9 +162,17 @@
                     </div>
 
                 </form>
-                <label for="first_name">Words entered:</label>
-                <br>
-                <span id="enum"></span>
+                <div class="col s6">
+                  <label for="first_name">Words entered:</label>
+                  <br>
+                  <div id="enum"></div>
+                </div>
+                <div class="col s6">
+                  <label for="first_name">Solution:</label>
+                  <button class="btn" onclick="showSoln()">Show Sol'n </button>
+                  <br>
+                  <div id="enum2"></div>
+                </div>
             </div>
             <span id="scor"></span>
           </div>
@@ -137,24 +183,7 @@
     </div>
     </div>
 
-    <div class="container">
-      <div class="section">
-        <div class="row">
-          <div class="col s12 center">
 
-            <table width=368 cellpadding=0 cellspacing=0 id="timetable">
-            <tr><td id='bar_remaining' width=218 height=25></td><td id='bar_elapsed' width=150 height=25></td>
-            </table>
-            <div id="timeremaining" style="margin-bottom:10px; margin-top: 10px;">
-            Time remaining: ...
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-    </div>
 
 </body>
 
@@ -171,11 +200,13 @@
 
                           </div>
                       </div>
-                      1. Select puzzle dimension <br>
-                      2. Enter all the possible words in the tray <br>
-                      3. 3 minutes will be allotted for the player <br>
-                      4. Words should be have minimum length of 3. <br>
-                      5. Have fun.
+                      1. Upload input file and dictionary file <br>
+                      2. Select puzzle tray to be solved <br>
+                      3. Enter all the possible words in the tray <br>
+                      4. 3 minutes will be allotted for the player <br>
+                      5. Words should be have minimum length of 2. <br>
+                      6. To show solution, click the Show Sol'n button. This will abort the game. <br>
+                      7. Have fun.
                   </div>
               </div>
           </div>
@@ -185,10 +216,35 @@
 
               <div class="row card grey lighten-4">
                   <br>
-                  <h6><b>Dimension/Time limit</b></h6>
+                  <div class="col s6">
+                    <label>Upload Input Data</label>
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>Upload</span>
+                        <input type="file" id="fileinput">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col s6">
+                    <label>Upload Dictionary</label>
+                    <div class="file-field input-field">
+                      <div class="btn">
+                        <span>Upload</span>
+                        <input type="file" id="fileinput_dict">
+                      </div>
+                      <div class="file-path-wrapper">
+                        <input class="file-path validate" type="text">
+                      </div>
+                    </div>
+                  </div>
+                  <h6><b>Choose a Puzzle</b></h6>
+
                   <div class="input-field col s7">
-                      <select id="puz_container" ng-model="data.dimension">
-                          <option value = "0">0</option>
+                      <select id="myContainer" >
+
                       </select>
                       <select name="totaltimesel" id="totaltime">
                         <option value="30">30 seconds</option>
@@ -199,14 +255,13 @@
                         <option value="240">Four minutes</option>
                         <option value="300">Five minutes</option>
                       </select>
-                      <label>Select size/time</label>
+                      <label>Select puzzle/time</label>
 
                   </div>
                   <div class="input-field col s4">
-                      <a ng-click="buildPuzzle(0)" class="waves-effect waves-light btn" onclick="newgame()">Choose</a>
-                      <input type="file" id="fileinput" />
-                      <input type="file" id="fileinput_dict" />
+                      <a ng-click="buildPuzzle()" class="waves-effect waves-light btn" onclick="newgame()">Choose</a>
                   </div>
+
               </div>
           </div>
       </div>

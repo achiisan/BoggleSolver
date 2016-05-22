@@ -18,24 +18,41 @@
       })
   </script>
   <script type="text/javascript">
-  function startTimer(duration, display) {
-      var timer = duration, minutes, seconds;
 
-      setInterval(function () {
-          minutes = parseInt(timer / 60, 10);
-          seconds = parseInt(timer % 60, 10);
+    function newgame(){
+      var tt = document.getElementById('totaltime');
+      if(tt)
+      {
+       totaltime = parseInt(tt.value)*1000;
+      }
 
-          minutes = minutes < 10 ? "0" + minutes : minutes;
-          seconds = seconds < 10 ? "0" + seconds : seconds;
+      if(timeremaining>0)
+       clearTimeout(timervar);
+      timeremaining = totaltime;
+      timervar = setTimeout("tick()", updatefrequency);
+    }
 
-          display.textContent = minutes + ":" + seconds;
+    function tick(){
+      timeremaining = timeremaining-updatefrequency;
+      if(timeremaining<=0)
+      {
+       timeremaining = 0;
+      } else
+      {
+       timervar = setTimeout('tick()', updatefrequency);
+      }
+      var t = Math.ceil(timeremaining/1000);
+      document.getElementById('timeremaining').innerHTML = "Remaining time: "+t;
+      var w = Math.floor(bar_width*timeremaining/totaltime);
+      document.getElementById('bar_remaining').width = w;
+      document.getElementById('bar_elapsed').width = bar_width-w;
+    }
 
-          if (--timer < 0) {
-              timer = duration;
-          }
-      }, 1000);
-
-  }
+    bar_width = 368;
+    totaltime = 10*1000;
+    timeremaining = 0;
+    updatefrequency = 50;
+    timervar = null;
 
   </script>
 
@@ -102,8 +119,11 @@
         <div class="row">
           <div class="col s12 center">
 
+            <table width=368 cellpadding=0 cellspacing=0 id="timetable">
+            <tr><td id='bar_remaining' width=218 height=25></td><td id='bar_elapsed' width=150 height=25></td>
+            </table>
             <div id="timeremaining" style="margin-bottom:10px; margin-top: 10px;">
-            Time remaining: <span id="time"></span>
+            Time remaining: ...
             </div>
 
           </div>
@@ -134,13 +154,13 @@
               </div>
           </div>
 
-          <div class="col s3 offset-s1">
+          <div class="col s5 offset-s1">
 
 
               <div class="row card grey lighten-4">
                   <br>
-                  <h6><b>Dimension</b></h6>
-                  <div class="input-field col s5">
+                  <h6><b>Dimension/Time limit</b></h6>
+                  <div class="input-field col s7">
                       <select ng-model="data.dimension">
                           <option value="3" selected>3 x 3</option>
                           <option value="4">4 x 4</option>
@@ -153,10 +173,20 @@
                           <option value="11">11 x 11</option>
                           <option value="12">12 x 12</option>
                       </select>
-                      <label>Select size</label>
+                      <select name="totaltimesel" id="totaltime">
+                        <option value="30">30 seconds</option>
+                        <option value="60">60 seconds</option>
+                        <option value="90">90 seconds</option>
+                        <option value="120">Two minutes</option>
+                        <option value="180" selected="selected">Three minutes</option>
+                        <option value="240">Four minutes</option>
+                        <option value="300">Five minutes</option>
+                      </select>
+                      <label>Select size/time</label>
+
                   </div>
                   <div class="input-field col s4">
-                      <a ng-click="buildPuzzle()" class="waves-effect waves-light btn" onclick="startTimer(180,document.querySelector('#time'))">Choose</a>
+                      <a ng-click="buildPuzzle()" class="waves-effect waves-light btn" onclick="newgame()">Choose</a>
                   </div>
               </div>
           </div>

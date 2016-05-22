@@ -21,6 +21,7 @@
   <script type="text/javascript">
     function resetScore(){
       score=0;
+      $("#enum").html(" ");
       $("#scor").html("<br>"+ "Current Score: " + score);
     }
 
@@ -97,7 +98,8 @@
               <div class="row card grey lighten-4 teal-text">
                   <div class="col s12" id="boardContainer">
                       <div class="row center-align" ng-repeat="row in data.board track by $index">
-                          <div class="center-align col s1" ng-repeat="letter in row track by $index"><b> {{letter}} </b></div>
+                          <div class="center-align col s1" ng-repeat="letter in row track by $index"><b> {{letter}} </b>
+                          </div>
                       </div>
                   </div>
               </div>
@@ -112,7 +114,9 @@
                     </div>
 
                 </form>
-              <span id="enum"></span>
+                <label for="first_name">Words entered:</label>
+                <br>
+                <span id="enum"></span>
             </div>
             <span id="scor"></span>
           </div>
@@ -125,7 +129,6 @@
 
     <div class="container">
       <div class="section">
-
         <div class="row">
           <div class="col s12 center">
 
@@ -137,6 +140,7 @@
             </div>
 
           </div>
+
         </div>
 
       </div>
@@ -158,8 +162,10 @@
                           </div>
                       </div>
                       1. Select puzzle dimension <br>
-                      2. You have 3 minutes to enter all the possible words you see in the tray <br>
-                      3. Enjoy
+                      2. Enter all the possible words in the tray <br>
+                      3. 3 minutes will be allotted for the player <br>
+                      4. Words should be have minimum length of 3. <br>
+                      5. Have fun.
                   </div>
               </div>
           </div>

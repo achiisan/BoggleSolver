@@ -31,11 +31,12 @@ project.controller('projectController', ['$scope', function ($scope) {
 
         if (index < 0) {
             console.log("Word not found!");
-            Materialize.toast('The word "' + word +' " is not a valid word!', 2000, 'red darken-4');
+            Materialize.toast(word +'  is not valid.', 2000, 'red darken-4');
         }
         else {
+            
             console.log("Word found!");
-            Materialize.toast('The word "' + word +' " is a valid word!', 2000, 'teal');
+            Materialize.toast( word +' " is valid!', 2000, 'teal');
             $scope.data.correct.push(word);
             $("#enum").append(word+"<br>");
             score++;

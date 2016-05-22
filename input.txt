@@ -1,4 +1,4 @@
-2
+3
 3
 B E D
 U M O
@@ -9,3 +9,19 @@ F G H I J
 K L M N O
 P Q R S T
 U V W X Y
+15
+A B C D E P Q R S T U V W X Y
+G H I J K L M N O P Q R S T U
+A B C D E F G H I J K L M N O
+A B C D E P Q R S T U V W X Y
+G H I J K L M N O P Q R S T U
+A B C D E F G H I J K L M N O
+A B C D E P Q R S T U V W X Y
+G H I J K L M N O P Q R S T U
+A B C D E F G H I J K L M N O
+A B C D E P Q R S T U V W X Y
+G H I J K L M N O P Q R S T U
+A B C D E F G H I J K L M N O
+A B C D E P Q R S T U V W X Y
+G H I J K L M N O P Q R S T U
+A B C D E F G H I J K L M N O

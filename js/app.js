@@ -34,7 +34,7 @@ project.controller('projectController', ['$scope', function ($scope) {
             Materialize.toast(word +'  is not valid.', 2000, 'red darken-4');
         }
         else {
-            
+
             console.log("Word found!");
             Materialize.toast( word +' " is valid!', 2000, 'teal');
             $scope.data.correct.push(word);
@@ -45,17 +45,22 @@ project.controller('projectController', ['$scope', function ($scope) {
         }
     }
 
-    $scope.buildPuzzle = function () {
-        var dimension = $scope.data.dimension;
-        var board = generateBoard(dimension);
+    $scope.buildPuzzle = function (a) {
+      var boards = puzzleCollection[a];
+      var dimension = boards.n;
+      var board = boards.puzzle;
 
-        $scope.data.board = board;
-        console.log(JSON.stringify(board));
-        console.log("Puzzle dimension: " + dimension);
+      $scope.data.board = board;
+      console.log(JSON.stringify(board));
+      console.log("Puzzle dimension: " + dimension);
+      var sol = null;
+      sol = solvePuzzle(a);
+      $scope.data.solutions = sol;
 
         //Insert algo here
         //Populate solution then push each word
         //      e.g. $scope.data.solutions.push(valid_word);
     }
+
 
 }]);

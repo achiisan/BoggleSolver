@@ -11,10 +11,16 @@
   <script src="./js/jquery.min.js"></script>
   <script src="./js/materialize.min.js"></script>
   <script src="./js/angular.min.js"></script>
+  <script src="./js/elements.js"></script>
+  <script src="./js/puzzle.js"></script>
+  <script src="./js/trie.js"></script>
+  <script src="./js/boggle.js"></script>
   <script src="./js/app.js"></script>
   <script>
       $(document).ready(function() {
           $('select').material_select();
+          document.getElementById('fileinput').addEventListener('change', readSingleFile, false);
+          document.getElementById('fileinput_dict').addEventListener('change', readSingleFile2, false);
       })
 
   </script>
@@ -24,7 +30,9 @@
       $("#scor").html("<br>"+ "Current Score: " + score);
     }
 
-
+    function selectboard(){
+      $("#puz_container").append($("<option />").val("1").text("1"));
+    }
     function newgame(){
       resetScore();
       var tt = document.getElementById('totaltime');
@@ -48,6 +56,7 @@
       {
        timervar = setTimeout('tick()', updatefrequency);
       }
+
       var t = Math.ceil(timeremaining/1000);
       document.getElementById('timeremaining').innerHTML = "Remaining time: "+t;
       var w = Math.floor(bar_width*timeremaining/totaltime);
@@ -69,6 +78,7 @@
           text-transform: uppercase
       }
       #boardContainer {
+          width: auto;!important
           padding: 2.5%;
       }
 
@@ -171,17 +181,8 @@
                   <br>
                   <h6><b>Dimension/Time limit</b></h6>
                   <div class="input-field col s7">
-                      <select ng-model="data.dimension">
-                          <option value="3" selected>3 x 3</option>
-                          <option value="4">4 x 4</option>
-                          <option value="5">5 x 5</option>
-                          <option value="6">6 x 6</option>
-                          <option value="7">7 x 7</option>
-                          <option value="8">8 x 8</option>
-                          <option value="9">9 x 9</option>
-                          <option value="10">10 x 10</option>
-                          <option value="11">11 x 11</option>
-                          <option value="12">12 x 12</option>
+                      <select id="puz_container" ng-model="data.dimension">
+                          <option value = "0">0</option>
                       </select>
                       <select name="totaltimesel" id="totaltime">
                         <option value="30">30 seconds</option>
@@ -196,7 +197,9 @@
 
                   </div>
                   <div class="input-field col s4">
-                      <a ng-click="buildPuzzle()" class="waves-effect waves-light btn" onclick="newgame()">Choose</a>
+                      <a ng-click="buildPuzzle(0)" class="waves-effect waves-light btn" onclick="newgame()">Choose</a>
+                      <input type="file" id="fileinput" />
+                      <input type="file" id="fileinput_dict" />
                   </div>
               </div>
           </div>

@@ -30,8 +30,7 @@ table#gametable td
 
 table#timetable
 {
- border: 3px solid black;
- border-top: 0px solid black;
+
 }
 
 div#timeremaining
@@ -41,10 +40,10 @@ div#timeremaining
 
 td#bar_remaining
 {
- background-color: green;
+ background-color: #4CAF50 !important;
 }
 
 td#bar_elapsed
 {
- background-color: red;
+ background-color: #e51c23 !important;
 }

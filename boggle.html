@@ -19,10 +19,16 @@
 
   </script>
   <script type="text/javascript">
-
+    function resetScore(){
+      score=0;
+      $scope.data.correct = [];
+      $("#enum").html("");
+      $("#scor").html("<br>"+ "Current Score: " + score);
+    }
 
 
     function newgame(){
+      resetScore();
       var tt = document.getElementById('totaltime');
       if(tt)
       {
@@ -100,7 +106,7 @@
           </div>
           <div class="col s5 offset-s1">
 
-            <div class="row card grey lighten-4" id="enum">
+            <div class="row card grey lighten-4" >
                 <form ng-submit="checkWord()">
                     <div class="input-field col s12">
                         <input placeholder=" " id="wordfield" type="text" ng-model="data.word">
@@ -108,8 +114,9 @@
                     </div>
 
                 </form>
-
+              <span id="enum"></span>
             </div>
+            <span id="scor"></span>
           </div>
         </div>
 

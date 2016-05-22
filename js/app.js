@@ -1,6 +1,7 @@
 'use strict';
 
 var project = angular.module('project', []);
+var score = 0;
 
 project.controller('projectController', ['$scope', function ($scope) {
     $scope.data = {};
@@ -37,6 +38,9 @@ project.controller('projectController', ['$scope', function ($scope) {
             Materialize.toast('The word "' + word +' " is a valid word!', 2000, 'teal');
             $scope.data.correct.push(word);
             $("#enum").append(word+"<br>");
+            score++;
+
+            $("#scor").html("<br>"+ "Current Score: " + score);
         }
     }
 

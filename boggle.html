@@ -16,8 +16,11 @@
       $(document).ready(function() {
           $('select').material_select();
       })
+
   </script>
   <script type="text/javascript">
+
+
 
     function newgame(){
       var tt = document.getElementById('totaltime');
@@ -97,13 +100,15 @@
           </div>
           <div class="col s5 offset-s1">
 
-            <div class="row card grey lighten-4">
+            <div class="row card grey lighten-4" id="enum">
                 <form ng-submit="checkWord()">
                     <div class="input-field col s12">
                         <input placeholder=" " id="wordfield" type="text" ng-model="data.word">
                         <label for="first_name">Answer:</label>
                     </div>
+
                 </form>
+
             </div>
           </div>
         </div>

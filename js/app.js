@@ -8,6 +8,7 @@ project.controller('projectController', ['$scope', function ($scope) {
     $scope.data.word = "";
     $scope.data.board = null;
     $scope.data.solutions = ["PUT" , "WORDS" , "HERE"];
+    $scope.data.correct = [];
 
     var generateBoard = function (dimension) {
         var letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
@@ -34,6 +35,8 @@ project.controller('projectController', ['$scope', function ($scope) {
         else {
             console.log("Word found!");
             Materialize.toast('The word "' + word +' " is a valid word!', 2000, 'teal');
+            $scope.data.correct.push(word);
+            $("#enum").append(word+"<br>");
         }
     }
 

@@ -35,18 +35,25 @@ project.controller('projectController', ['$scope', function ($scope) {
         }
         else {
 
-          if($scope.data.correct.indexOf(word)){
-            console.log("Word found!");
-            $scope.data.correct.push(word);
-            Materialize.toast( word + ' is valid!' , 2000, 'teal');
+          if(timeremaining!==0){
+            if($scope.data.correct.indexOf(word) !== -1){
 
-            $("#enum").append(word+"<br>");
-            score++;
-            $("#scor").html("<br>"+ "Current Score: " + score);
+                Materialize.toast( 'Word already exists' , 2000);
+            }else{
+
+              console.log("Word found!");
+              $scope.data.correct.push(word);
+              Materialize.toast( word + ' is valid!' , 2000, 'teal');
+
+              $("#enum").append(word+"<br>");
+              score++;
+              $("#scor").html("<br>"+ "Current Score: " + score);
+            }
           }else{
-            Materialize.toast( 'Word already exists' , 2000);
 
+            Materialize.toast( 'Please start a new game' , 2000);
           }
+
         }
     }
 
